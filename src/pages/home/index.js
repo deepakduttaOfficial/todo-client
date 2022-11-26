@@ -58,7 +58,8 @@ const Home = () => {
             <Heading size="md">All Todos</Heading>
           </CardHeader>
           <Divider />
-          {todoLoading &&
+          {isAuthenticate() &&
+            todoLoading &&
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => {
               return <Skeleton height="70px" key={index} mt={1} />;
             })}
@@ -82,6 +83,7 @@ const Home = () => {
         {!todoLoading && todos?.length === 0 && (
           <Image src={noTodo} alt="No todo found" />
         )}
+        {!isAuthenticate() && <Image src={noTodo} alt="No todo found" />}
       </Container>
     </>
   );
