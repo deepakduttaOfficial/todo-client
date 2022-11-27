@@ -14,9 +14,9 @@ export const createTodo = (profileId, data, token) => {
     });
 };
 
-export const getTodos = (token) => {
+export const getTodos = (token, sort = "1") => {
   return axios
-    .get(`${REACT_APP_API_KEY}/todos/get`, {
+    .get(`${REACT_APP_API_KEY}/todos/get?sort=${sort}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {

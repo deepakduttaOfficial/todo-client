@@ -18,6 +18,7 @@ import {
   Divider,
   Image,
   Skeleton,
+  HStack,
 } from "@chakra-ui/react";
 
 // Create another date formate function
@@ -26,16 +27,19 @@ import { TodoContext } from "../../context/todo";
 // Image
 import noTodo from "../../images/ontodo.svg";
 import { useNavigate } from "react-router-dom";
+import Sort from "../../components/search/Sort";
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const { refreshTodo } = useContext(TodoContext);
   const [todoLoading, setTodoLoading] = useState(false);
-
   const navigate = useNavigate();
+  // Sort
+  const [sort, setSort] = useState("1");
+
   useEffect(() => {
     setTodoLoading(true);
     isAuthenticate() &&
-      getTodos(isAuthenticate()?.token).then((response) => {
+      getTodos(isAuthenticate()?.token, sort).then((response) => {
         if (!response.error) {
           setTodos(response.todos);
           setTodoLoading(false);
@@ -47,7 +51,13 @@ const Home = () => {
           });
         }
       });
-  }, [refreshTodo, navigate]);
+  }, [refreshTodo, navigate, sort]);
+
+  // Sort
+  const getValue = (val) => {
+    setSort(val);
+  };
+
   return (
     <>
       <ToastContainer />
@@ -55,7 +65,12 @@ const Home = () => {
       <Container maxW="2xl" my={5}>
         <Card variant={"filled"} boxShadow={"2xl"}>
           <CardHeader>
-            <Heading size="md">All Todos</Heading>
+            <HStack>
+              <Heading size="md" flexGrow={1}>
+                All Todos
+              </Heading>
+              {isAuthenticate() && <Sort sort={sort} getValue={getValue} />}
+            </HStack>
           </CardHeader>
           <Divider />
           {isAuthenticate() &&
