@@ -28,6 +28,7 @@ import { TodoContext } from "../../context/todo";
 import noTodo from "../../images/ontodo.svg";
 import { useNavigate } from "react-router-dom";
 import Sort from "../../components/search/Sort";
+import SearchBar from "../../components/search/SearchBar";
 const Home = () => {
   const [todos, setTodos] = useState([]);
   const { refreshTodo } = useContext(TodoContext);
@@ -35,11 +36,12 @@ const Home = () => {
   const navigate = useNavigate();
   // Sort
   const [sort, setSort] = useState("1");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setTodoLoading(true);
     isAuthenticate() &&
-      getTodos(isAuthenticate()?.token, sort).then((response) => {
+      getTodos(isAuthenticate()?.token, sort, search).then((response) => {
         if (!response.error) {
           setTodos(response.todos);
           setTodoLoading(false);
@@ -51,11 +53,18 @@ const Home = () => {
           });
         }
       });
-  }, [refreshTodo, navigate, sort]);
+  }, [refreshTodo, navigate, sort, search]);
 
   // Sort
   const getValue = (val) => {
     setSort(val);
+  };
+  // search
+  const clickToSearch = (onClose) => {
+    onClose();
+  };
+  const searchChange = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -69,7 +78,16 @@ const Home = () => {
               <Heading size="md" flexGrow={1}>
                 All Todos
               </Heading>
-              {isAuthenticate() && <Sort sort={sort} getValue={getValue} />}
+              {isAuthenticate() && (
+                <>
+                  <SearchBar
+                    clickToSearch={clickToSearch}
+                    searchChange={searchChange}
+                    search={search}
+                  />
+                  <Sort sort={sort} getValue={getValue} />
+                </>
+              )}
             </HStack>
           </CardHeader>
           <Divider />
