@@ -45,6 +45,7 @@ const CreateTask = () => {
       } else {
         setTask("");
         setLoading(false);
+        onClose();
         setRefreshTask(!refreshTask);
         toast.success(`Task created successfully`, {
           theme: "dark",

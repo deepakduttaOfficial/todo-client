@@ -34,8 +34,8 @@ const SearchBar = ({ clickToSearch, searchChange, search }) => {
                 children={<BiSearch color="gray.300" />}
               />
               <Input
-                type="tel"
-                placeholder="Phone number"
+                type="text"
+                placeholder="Search..."
                 border={"none"}
                 ring={0}
                 onChange={searchChange}

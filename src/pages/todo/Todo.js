@@ -58,6 +58,7 @@ const Todo = () => {
           success: true,
           loading: false,
         });
+        onClose();
         toast.success(`Todo created successfully`, {
           theme: "dark",
           autoClose: 2000,
