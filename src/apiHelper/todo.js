@@ -1,6 +1,7 @@
 import axios from "axios";
 import { REACT_APP_API_KEY } from "../backend";
 
+// Create a Todo
 export const createTodo = (profileId, data, token) => {
   return axios
     .post(`${REACT_APP_API_KEY}/todo/create/${profileId}`, data, {
@@ -14,6 +15,7 @@ export const createTodo = (profileId, data, token) => {
     });
 };
 
+//  Get all Todo
 export const getTodos = (token, sort = "1", search) => {
   return axios
     .get(
@@ -30,6 +32,7 @@ export const getTodos = (token, sort = "1", search) => {
     });
 };
 
+// Get single todo
 export const getTodo = (token, profileId, todoId) => {
   return axios
     .get(`${REACT_APP_API_KEY}/todo/get/${profileId}/${todoId}`, {
@@ -43,6 +46,7 @@ export const getTodo = (token, profileId, todoId) => {
     });
 };
 
+// Update todo
 export const updateTodo = (profileId, todoId, data, token) => {
   return axios
     .put(`${REACT_APP_API_KEY}/todo/update/${profileId}/${todoId}`, data, {
@@ -56,6 +60,7 @@ export const updateTodo = (profileId, todoId, data, token) => {
     });
 };
 
+// Remove todo
 export const removeTodo = (token, profileId, todoId) => {
   return axios
     .delete(`${REACT_APP_API_KEY}/todo/remove/${profileId}/${todoId}`, {

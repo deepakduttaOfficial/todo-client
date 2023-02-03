@@ -1,6 +1,7 @@
 import axios from "axios";
 import { REACT_APP_API_KEY } from "../../backend";
 
+//  Sign up helper
 export const signup = (data) => {
   return axios
     .post(`${REACT_APP_API_KEY}/signup`, data)
@@ -12,6 +13,7 @@ export const signup = (data) => {
     });
 };
 
+// Sign in helper
 export const signin = (data) => {
   return axios
     .post(`${REACT_APP_API_KEY}/signin`, data)
@@ -23,6 +25,7 @@ export const signin = (data) => {
     });
 };
 
+// User authenticate
 export const authenticate = (data, next) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("token", JSON.stringify(data));

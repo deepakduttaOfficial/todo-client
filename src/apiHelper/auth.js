@@ -1,6 +1,7 @@
 import axios from "axios";
 import { REACT_APP_API_KEY } from "../backend";
 
+//  Sinup Helper
 export const signup = (data) => {
   return axios
     .post(`${REACT_APP_API_KEY}/signup`, data)
@@ -12,6 +13,7 @@ export const signup = (data) => {
     });
 };
 
+// Signin helper
 export const signin = (data) => {
   return axios
     .post(`${REACT_APP_API_KEY}/signin`, data)
@@ -23,6 +25,7 @@ export const signin = (data) => {
     });
 };
 
+// Set token in localStroage
 export const authenticate = (data, next) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("token", JSON.stringify(data));
@@ -30,6 +33,7 @@ export const authenticate = (data, next) => {
   next();
 };
 
+// Get token for the protected routes
 export const isAuthenticate = () => {
   if (typeof window === "undefined") {
     return false;
@@ -41,6 +45,7 @@ export const isAuthenticate = () => {
   }
 };
 
+// Signout
 export const signout = (next) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("token");

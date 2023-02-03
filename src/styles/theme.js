@@ -9,6 +9,13 @@ const styles = {
   }),
 };
 
+// 2. Add your color mode config
+const config = {
+  initialColorMode: "system",
+  useSystemColorMode: true,
+};
+
 export const theme = extendTheme({
+  config,
   styles,
 });

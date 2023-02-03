@@ -23,6 +23,7 @@ const Taskcard = ({ task, date, time, taskId, index }) => {
   const { refreshTask, setRefreshTask } = useContext(TaskContext);
   const [taskLoading, setTaskLoading] = useState(false);
 
+  // Remove task function
   const isRemove = () => {
     setTaskLoading(true);
     removeTask(token, data._id, taskId).then((response) => {
